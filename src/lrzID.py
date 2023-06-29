@@ -1,4 +1,4 @@
-"""userncenabled.py - FreeIPA plugin to allow to enable users for nextcloud via cli.
+"""userncquota.py - FreeIPA plugin to set a quota for nextcloud users.
 
 Copyright (C) $( 2020 ) Radio Bern RaBe
                         Switzerland
@@ -24,10 +24,6 @@ https://github.com/radiorabe/kanboard-tasks-from-email
 Authors:
  Simon Nussbaum <smirta@gmx.net>
 
-Description:
-With this plugin a switch will be added to the ipa cli to allow users to
-connect to nextcloud. It will set the Attribute nextcloudEnabled either to
-TRUE or FALSE.
 
 For this to work, extending the LDAP schema is required.
 
@@ -35,27 +31,26 @@ Installation:
 Copy file to <path to python lib>/ipaserver/plugins/
 
 Usage:
-ipa user-mod --nextcloudenabled=TRUE <username>
+ipa user-mod --lrzID="ab123xy" <username>
 """
 
 from ipaserver.plugins import user
-from ipalib.parameters import Bool
-from ipalib import _
+from ipalib.parameters import Str
+from ipalib.text import _
 
 user.user.takes_params = user.user.takes_params + (
-    Bool(
-        "nextcloudenabled?",
-        cli_name="nextcloudenabled",
-        label=_("Nextcloud Share enabled?"),
+    Str(
+        "lrzID?",
+        cli_name="lrzID",
+        label=_("LRZ user ID"),
         doc=_(
-            "Whether or not a nextcloud share is created for this user (default is false)."
+            'LRZ user ID (e.g. "ab123xy")'
         ),
-        default=False,
-        autofill=True,
+        autofill=False,
     ),
 )
 
-user.user.default_attributes.append("nextcloudenabled")
+user.user.default_attributes.append("lrzID")
 
 
 # pylint: disable-msg=unused-argument,invalid-name,line-too-long
@@ -64,7 +59,7 @@ def useradd_precallback(self, ldap, dn, entry, attrs_list, *keys, **options):
 
     See <https://github.com/freeipa/freeipa/blob/master/doc/guide/guide.org#extending-existing-object> for details.
     """
-    entry["objectclass"].append("nextclouduser")
+    entry["objectclass"].append("lrzID")
     return dn
 
 

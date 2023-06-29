@@ -100,8 +100,8 @@ ipa config-mod --addattr=ipaUserObjectClasses=nextcloudUser
 Copy the plugin files to `<path to python libs>/ipaserver/plugins` and restart apache.
 
 ```bash
-cp usernc* /usr/lib/python2.7/site-packages/ipaserver/plugins/
-cd /usr/lib/python2.7/site-packages/ipaserver/plugins/
+cp usernc* /usr/lib/python3.9/site-packages/ipaserver/plugins
+cd /usr/lib/python3.9/site-packages/ipaserver/plugins
 python -m compileall usernc* && python -O -m compileall usernc*
 apachectl graceful
 ```

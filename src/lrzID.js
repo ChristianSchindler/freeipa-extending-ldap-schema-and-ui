@@ -1,6 +1,6 @@
 /*
  *###############################################################################
- * userncquota.js - FreeIPA plugin to set a quota for nextcloud users via web ui 
+ * lrzID.js - FreeIPA plugin to set a quota for nextcloud users via web ui
  *###############################################################################
  *
  * Copyright (C) $( 2020 ) Radio Bern RaBe
@@ -28,10 +28,6 @@
  *  Simon Nussbaum <smirta@gmx.net>
  *
  * Description:
- * With this plugin an input box will be added to the user settings in the web 
- * ui to set a quota for users connecting to nextcloud. It will set the 
- * Attribute nextcloudQuota. Allowed values are 'default' or an integer with 
- * 'MB', 'GB' etc.
  *
  * For this to work, extending the LDAP schema is required.
  *
@@ -53,21 +49,21 @@ function get_item(array, attr, value) {
 		return null;
 }
 
-var nc_quota_plugin = {};
+var tum_lrzID_plugin = {};
 
 // adds nextcloud quota field into user account facet
-nc_quota_plugin.add_nc_quota_pre_op = function() {
+tum_lrzID_plugin.add_tum_lrzID_pre_op = function() {
         var facet = get_item(user_mod.entity_spec.facets, '$type', 'details');
         var section = get_item(facet.sections, 'name', 'account');
         section.fields.push({
-                                name: 'nextcloudquota',
-                                label: 'Nextcloud Share Quota',
+                                name: 'lrzID',
+                                label: 'LRZ user ID (e.g. "ab123xy")',
                                 flags: ['w_if_no_aci']
         });
         return true;
 };
 
-phases.on('customization', nc_quota_plugin.add_nc_quota_pre_op);
+phases.on('customization', tum_lrzID_plugin.add_tum_lrzID_pre_op);
 
-return nc_quota_plugin;
+return tum_lrzID_plugin;
 });
