@@ -40,17 +40,23 @@ from ipalib.text import _
 
 user.user.takes_params = user.user.takes_params + (
     Str(
-        "lrzID?",
-        cli_name="lrzID",
+        "warrLrzID?",
+        cli_name="warrLrzID",
         label=_("LRZ user ID"),
         doc=_(
             'LRZ user ID (e.g. "ab123xy")'
         ),
+        default="none",
         autofill=False,
+        pattern="^(default|none|[0-9]+ [MGT]B)$",
+        pattern_errmsg="".join(
+            'may only be "none", '
+            '"default" or a number of mega-, giga- or terabytes (e.g. 1024 MB)'
+        ),
     ),
 )
 
-user.user.default_attributes.append("lrzID")
+user.user.default_attributes.append("warrLrzID")
 
 
 # pylint: disable-msg=unused-argument,invalid-name,line-too-long
@@ -59,7 +65,7 @@ def useradd_precallback(self, ldap, dn, entry, attrs_list, *keys, **options):
 
     See <https://github.com/freeipa/freeipa/blob/master/doc/guide/guide.org#extending-existing-object> for details.
     """
-    entry["objectclass"].append("lrzID")
+    entry["objectclass"].append("warrLrzID")
     return dn
 
 
@@ -75,7 +81,7 @@ def usermod_precallback(self, ldap, dn, entry, attrs_list, *keys, **options):
     if "objectclass" not in entry.keys():
         old_entry = ldap.get_entry(dn, ["objectclass"])
         entry["objectclass"] = old_entry["objectclass"]
-    entry["objectclass"].append("nextclouduser")
+    entry["objectclass"].append("warrLrzID")
     return dn
 
 
