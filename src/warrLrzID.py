@@ -65,7 +65,7 @@ def useradd_precallback(self, ldap, dn, entry, attrs_list, *keys, **options):
 
     See <https://github.com/freeipa/freeipa/blob/master/doc/guide/guide.org#extending-existing-object> for details.
     """
-    entry["objectclass"].append("warrLrzID")
+    entry["objectclass"].append("tumUser")
     return dn
 
 
@@ -81,7 +81,7 @@ def usermod_precallback(self, ldap, dn, entry, attrs_list, *keys, **options):
     if "objectclass" not in entry.keys():
         old_entry = ldap.get_entry(dn, ["objectclass"])
         entry["objectclass"] = old_entry["objectclass"]
-    entry["objectclass"].append("warrLrzID")
+    entry["objectclass"].append("tumUser")
     return dn
 
 
