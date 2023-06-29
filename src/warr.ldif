@@ -34,30 +34,30 @@
 dn: cn=schema
 changetype: modify
 add: attributeTypes
-attributeTypes: ( 1.3.6.1.4.1.49213.1.1.1 NAME 'warrLrzID'
+attributeTypes: ( 1.3.6.1.4.1.49213.1.1.1 NAME 'warrlrzid'
         DESC 'LRZ user ID (e.g. "ab123xy")'
         EQUALITY caseIgnoreMatch
         SUBSTR caseIgnoreSubstringsMatch
         SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE)
-attributeTypes: ( 1.3.6.1.4.1.49213.1.1.2 NAME 'warrGitlabID'
+attributeTypes: ( 1.3.6.1.4.1.49213.1.1.2 NAME 'warrgitlabid'
         DESC 'User ID of https://gitlab.lrz.de/'
         EQUALITY caseIgnoreMatch
         SUBSTR caseIgnoreSubstringsMatch
         SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE)
-attributeTypes: ( 1.3.6.1.4.1.49213.1.1.3 NAME 'warrStudies'
+attributeTypes: ( 1.3.6.1.4.1.49213.1.1.3 NAME 'warrstudies'
         DESC 'Studies of the member (e.g. Informatics, Aerospace) '
         EQUALITY caseIgnoreMatch
         SUBSTR caseIgnoreSubstringsMatch
         SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE)
-attributeTypes: ( 1.3.6.1.4.1.49213.1.1.4 NAME 'warrMatriculationSemester'
+attributeTypes: ( 1.3.6.1.4.1.49213.1.1.4 NAME 'warrmatriculationsemester'
         DESC 'Semester of first matriculation (e.g. WS2011, SS2021)'
         EQUALITY caseIgnoreMatch
         SUBSTR caseIgnoreSubstringsMatch
         SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE)
 -
 add: objectclasses
-objectClasses: ( 1.3.6.1.4.1.49213.1.2.1 NAME 'tumUser'
+objectClasses: ( 1.3.6.1.4.1.49213.1.2.1 NAME 'warruser'
         DESC 'A Nextcloud user'
         SUP top AUXILIARY
-        MAY ( warrLrzID $ warrGitlabID $ warrStudies $  warrMatriculationSemester )
+        MAY ( warrlrzid $ warrgitlabid $ warrstudies $  warrmatriculationsemester )
         )
