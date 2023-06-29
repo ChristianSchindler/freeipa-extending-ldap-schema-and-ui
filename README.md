@@ -79,7 +79,7 @@ cd extending-freeipa/src
 Extend the schema with the following command on the or a FreeIPA server:
 
 ```bash
-ldapadd -H ldap://$HOSTNAME -D 'cn=Directory Manager' -W -f nextcloud.ldif
+ldapadd -H ldap://$HOSTNAME -D 'cn=Directory Manager' -W -f warr.ldif
 ```
 
 Check if schema was extended:
