@@ -49,21 +49,21 @@ function get_item(array, attr, value) {
 		return null;
 }
 
-var tum_lrzID_plugin = {};
+var warrLrzID_plugin = {};
 
 // adds nextcloud quota field into user account facet
-tum_lrzID_plugin.add_tum_lrzID_pre_op = function() {
+warrLrzID_plugin.add_warrLrzID_pre_op = function() {
         var facet = get_item(user_mod.entity_spec.facets, '$type', 'details');
         var section = get_item(facet.sections, 'name', 'account');
         section.fields.push({
-                                name: 'lrzID',
+                                name: 'warrLrzID',
                                 label: 'LRZ user ID (e.g. "ab123xy")',
                                 flags: ['w_if_no_aci']
         });
         return true;
 };
 
-phases.on('customization', tum_lrzID_plugin.add_tum_lrzID_pre_op);
+phases.on('customization', warrLrzID_plugin.add_warrLrzID_pre_op);
 
-return tum_lrzID_plugin;
+return warrLrzID_plugin;
 });
